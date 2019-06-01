@@ -1,9 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Toggle from './Toggle';
 
 const App = () => {
   const [name, setName] = useState('');
   console.log('render');
+
+  useEffect(() => {
+    document.title = name;
+  });
   return (
     <div className="main-wrapper">
       <h1>Level Up Dishes</h1>
@@ -12,7 +16,6 @@ const App = () => {
       <form
         onSubmit={event => {
           event.preventDefault();
-          formSubmit(name, setName);
         }}>
       <input
         type="text"
@@ -24,9 +27,6 @@ const App = () => {
   );
 };
 
-const formSubmit = (value, setValue) => {
-  console.log(`Form submitted! ${value}`);
-  setValue('');
-};
+
 
 export default App
