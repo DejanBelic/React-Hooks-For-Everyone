@@ -5,7 +5,6 @@ function useTitleInput(initialValue) {
   useEffect(() => {
     document.title = value;
   });
-  console.log('render useTitleInput');
   return [value, setValue];
 }
 

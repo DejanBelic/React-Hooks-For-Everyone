@@ -1,15 +1,24 @@
-import React, { useState, useEffect, useRef, createContext } from 'react';
+import React, { useState, useEffect, useRef, createContext, useMemo } from 'react';
 import Toggle from './Toggle';
 import {useTitleInput} from './hooks/useTitleInput';
-import Counter from "./Counter";
+
+const reverseWord = word => {
+  console.log('function called')
+  return word
+    .split('')
+    .reverse()
+    .join('')
+};
+
+
 
 export const UserContext = createContext();
 
 const App = () => {
   const [name, setName] = useTitleInput('');
   const ref = useRef();
-  console.log('render APP');
-  // console.log('ref', ref.current);
+  const title = name;
+  const titleReversed = useMemo(() => reverseWord(title), [title]);
   return (
     <UserContext.Provider
       value={{
@@ -17,7 +26,9 @@ const App = () => {
       }}
     >
     <div className="main-wrapper" ref={ref}>
+
       <h1 onClick={() => ref.current.classList.add('mile')}>Level Up Dishes</h1>
+      {titleReversed}
       <Toggle />
       <h3>{name}</h3>
       <form
@@ -30,7 +41,6 @@ const App = () => {
       />
       <button>Submit</button>
       </form>
-      <Counter/>
     </div>
     </UserContext.Provider>
   );
