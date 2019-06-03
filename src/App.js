@@ -16,9 +16,21 @@ export const UserContext = createContext();
 
 const App = () => {
   const [name, setName] = useTitleInput('');
+  const [dishes, setDishes] = useState([]);
   const ref = useRef();
   const title = name;
   const titleReversed = useMemo(() => reverseWord(title), [title]);
+
+  const fetchDishes = async () => {
+    const res = await fetch('https://my-json-server.typicode.com/leveluptuts/fakeapi/dishes');
+    const data = await res.json();
+    setDishes(data);
+  }
+
+  useEffect( () => {
+    fetchDishes();
+  },[]);
+
   return (
     <UserContext.Provider
       value={{
@@ -41,6 +53,18 @@ const App = () => {
       />
       <button>Submit</button>
       </form>
+      {
+        dishes.map(dish => (
+          <article className="dish-card dish-card--withImage">
+            <h3>{dish.name}</h3>
+            <p>{dish.description}</p>
+            <div className="ingredients">{dish.ingredients.map(ingredient => (
+              <span>{ingredient}</span>
+            ))}</div>
+          </article>
+        ))
+      }
+
     </div>
     </UserContext.Provider>
   );
