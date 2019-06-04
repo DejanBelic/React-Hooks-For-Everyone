@@ -22,6 +22,7 @@ const App = () => {
   const titleReversed = useMemo(() => reverseWord(title), [title]);
 
   const fetchDishes = async () => {
+    console.log('ran')
     const res = await fetch('https://my-json-server.typicode.com/leveluptuts/fakeapi/dishes');
     const data = await res.json();
     setDishes(data);
@@ -29,7 +30,7 @@ const App = () => {
 
   useEffect( () => {
     fetchDishes();
-  },[]);
+  },[name]);
   // Empty array - hey use this only on mount - like componentDidMount()
 
   return (
