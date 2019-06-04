@@ -30,6 +30,7 @@ const App = () => {
   useEffect( () => {
     fetchDishes();
   },[]);
+  // Empty array - hey use this only on mount - like componentDidMount()
 
   return (
     <UserContext.Provider
@@ -40,7 +41,7 @@ const App = () => {
     <div className="main-wrapper" ref={ref}>
 
       <h1 onClick={() => ref.current.classList.add('mile')}>Level Up Dishes</h1>
-      {titleReversed}
+       {titleReversed}
       <Toggle />
       <h3>{name}</h3>
       <form
