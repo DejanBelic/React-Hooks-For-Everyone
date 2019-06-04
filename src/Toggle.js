@@ -8,8 +8,8 @@ const Toggle = () => {
   if (!userInfo.user) return null;
   return (
     <>
-    <button onClick={() => setToggle(!isToggled)}/>
-     {isToggled && <DishForm/>}
+
+     {isToggled  ? <DishForm setToggle={setToggle} /> : <button onClick={() => setToggle(!isToggled)}/>}
     </>
   )
 };
