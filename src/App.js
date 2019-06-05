@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef, createContext, useMemo } from 'react';
 import Toggle from './Toggle';
 import {useTitleInput} from './hooks/useTitleInput';
+import { useSpring, animated } from 'react-spring';
 
 const reverseWord = word => {
   console.log('function called')
@@ -32,7 +33,8 @@ const App = () => {
     fetchDishes();
   },[name]);
   // Empty array - hey use this only on mount - like componentDidMount()
-
+  const props = useSpring({ opacity: 1, from: { opacity:  0 }});
+console.log(props,'props')
   return (
     <UserContext.Provider
       value={{
@@ -41,7 +43,7 @@ const App = () => {
     >
     <div className="main-wrapper" ref={ref}>
 
-      <h1 onClick={() => ref.current.classList.add('mile')}>Level Up Dishes</h1>
+      <animated.h1  style={props} onClick={() => ref.current.classList.add('mile')}>Level Up Dishes</animated.h1>
        {titleReversed}
       <Toggle />
       <h3>{name}</h3>
